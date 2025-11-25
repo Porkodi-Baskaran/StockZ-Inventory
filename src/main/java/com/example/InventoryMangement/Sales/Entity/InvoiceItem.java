@@ -1,4 +1,6 @@
 package com.example.InventoryMangement.Sales.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 @Entity
 public class InvoiceItem {
@@ -32,7 +34,7 @@ public class InvoiceItem {
 
     private Integer productId;
 
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;

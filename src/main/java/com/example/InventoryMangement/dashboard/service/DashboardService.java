@@ -63,11 +63,17 @@ public class DashboardService {
 
         // Low stock
         dto.lowStockProducts = new ArrayList<>();
-        productRepo.findByInitialStockLessThan(0)
-                .forEach(p -> dto.lowStockProducts.add(p.getName()));
+//        productRepo.findByInitialStockLessThan(0)
+//                .forEach(p -> dto.lowStockProducts.add(p.getName()));
+        
+        productRepo.findLowStockProducts()
+        .forEach(p -> dto.lowStockProducts.add(p.getName()));
 
         // Active customers
         dto.activeCustomers = transactionRepo.activeCustomers();
+        
+        dto.topSellingProducts = transactionRepo.topSellingProducts();
+        dto.activeCustomerDetails = transactionRepo.activeCustomerDetails();
 
         return dto;
     }

@@ -1,6 +1,9 @@
 package com.example.InventoryMangement.Sales.Entity;
-import com.example.InventoryMangement.Product.Entity.Product;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,10 +20,12 @@ public class Invoice {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    private double total;
-    private double received;
+    private BigDecimal total;
+    private BigDecimal received;
     private String status;
-
+    private BigDecimal balance;
+    
+    @JsonManagedReference
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InvoiceItem> items = new ArrayList<>();
 
@@ -61,19 +66,19 @@ public class Invoice {
         this.customer = customer;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
-    public double getReceived() {
+    public BigDecimal getReceived() {
         return received;
     }
 
-    public void setReceived(double received) {
+    public void setReceived(BigDecimal received) {
         this.received = received;
     }
 
@@ -92,6 +97,14 @@ public class Invoice {
     public void setItems(List<InvoiceItem> items) {
         this.items = items;
     }
+
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
 
 
 }

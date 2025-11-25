@@ -24,7 +24,8 @@ public interface ProductRepo extends JpaRepository<Product, Integer>
 
 
 
-	List<Product> findByInitialStockLessThan(int qty);
+//	List<Product> findByInitialStockLessThan(int qty);
 
-
+	@Query("SELECT p FROM Product p WHERE p.currentStock <= p.lowStock")
+	List<Product> findLowStockProducts();
 }

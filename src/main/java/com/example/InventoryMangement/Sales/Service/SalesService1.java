@@ -126,6 +126,8 @@ public class SalesService1 {
             grandTotal += lineTotal.doubleValue();
         }
 
+        BigDecimal balance = invoice.getTotal().subtract(invoice.getReceived());
+        invoice.setBalance(balance);
 
 
 
@@ -157,6 +159,10 @@ public class SalesService1 {
             Transaction tx = new Transaction();
             tx.setProduct(product);
             tx.setQuantity(qty);
+            tx.setInvoiceNumber(invoice.getInvoiceNo());
+            tx.setAmountPaid(invoice.getReceived());
+            tx.setBalanceAmount(balance);
+            tx.setName(invoice.getCustomer().getName());
             // price per unit saved as integer in Transaction entity in your project -- cast carefully
             tx.setPricePerUnit((int) Math.round(item.getPrice()));
             tx.setTotalAmount((int) Math.round(item.getTotal()));
