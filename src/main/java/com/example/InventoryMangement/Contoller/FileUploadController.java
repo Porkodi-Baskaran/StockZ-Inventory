@@ -1,6 +1,6 @@
 package com.example.InventoryMangement.Contoller;
 import com.example.InventoryMangement.Service.S3Service;
-import com.example.InventoryMangement.WhatsappService.TwilioService;
+import com.example.InventoryMangement.WhatsappService.TwilioService1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class FileUploadController {
         return ResponseEntity.ok(presignedUrl);
     }
     @Autowired
-    private TwilioService twilioService;
+    private TwilioService1 twilioService;
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile multipartFile) {

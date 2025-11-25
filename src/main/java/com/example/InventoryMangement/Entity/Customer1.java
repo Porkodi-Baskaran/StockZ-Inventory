@@ -5,14 +5,12 @@ import jakarta.persistence.*;
 
 @Entity
 
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Customer1 {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-    private double price;
-    private int stock;   // 🔹 current available stock
+    private String phone;
+    private String email;
 
     public Long getId() {
         return id;
@@ -30,20 +28,20 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public int getStock() {
-        return stock;
+    public String getEmail() {
+        return email;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
 

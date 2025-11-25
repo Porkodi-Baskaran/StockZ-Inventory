@@ -1,14 +1,11 @@
-package com.example.InventoryMangement.Entity;
-
+package com.example.InventoryMangement.Sales.Entity;
+import com.example.InventoryMangement.Product.Entity.Product;
 import jakarta.persistence.*;
-
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +14,8 @@ public class Invoice {
     private String invoiceNo;
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
     private double total;
     private double received;
@@ -25,6 +23,10 @@ public class Invoice {
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InvoiceItem> items = new ArrayList<>();
+
+
+
+
 
 
     public Integer getId() {
@@ -90,6 +92,8 @@ public class Invoice {
     public void setItems(List<InvoiceItem> items) {
         this.items = items;
     }
+
+
 }
 
 

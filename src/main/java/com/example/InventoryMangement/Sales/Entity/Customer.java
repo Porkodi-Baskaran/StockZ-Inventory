@@ -1,10 +1,6 @@
-package com.example.InventoryMangement.Entity;
-
+package com.example.InventoryMangement.Sales.Entity;
 import jakarta.persistence.*;
-
-
 @Entity
-
 public class Customer {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

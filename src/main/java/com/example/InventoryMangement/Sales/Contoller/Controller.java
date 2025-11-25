@@ -1,10 +1,12 @@
-package com.example.InventoryMangement.Contoller;
-import com.example.InventoryMangement.Entity.Customer;
-import com.example.InventoryMangement.Entity.Invoice;
-import com.example.InventoryMangement.Service.SalesService;
+package com.example.InventoryMangement.Sales.Contoller;
+
+import com.example.InventoryMangement.Sales.Entity.Customer;
+import com.example.InventoryMangement.Sales.Entity.Invoice;
+import com.example.InventoryMangement.Sales.Service.SalesService1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -14,9 +16,9 @@ import java.util.List;
 public class Controller {
       @Autowired
 
-     private final SalesService salesService;
+     private final SalesService1 salesService;
 
-    public Controller(SalesService salesService) {
+    public Controller(SalesService1 salesService) {
         this.salesService = salesService;
     }
 

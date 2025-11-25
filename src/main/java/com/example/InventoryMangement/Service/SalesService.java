@@ -1,13 +1,13 @@
 ﻿package com.example.InventoryMangement.Service;
 
-import com.example.InventoryMangement.Entity.Customer;
-import com.example.InventoryMangement.Entity.Invoice;
+import com.example.InventoryMangement.Entity.Customer1;
+import com.example.InventoryMangement.Entity.Invoice1;
 
-import com.example.InventoryMangement.Entity.InvoiceItem;
-import com.example.InventoryMangement.PDFGenrator.PdfGeneratorService;
-import com.example.InventoryMangement.Repo.CustomerRepo;
-import com.example.InventoryMangement.Repo.InvoiceRepo;
-import com.example.InventoryMangement.Repo.ProductRepo;
+import com.example.InventoryMangement.Entity.InvoiceItem1;
+import com.example.InventoryMangement.PDFGenrator.PdfGeneratorService1;
+import com.example.InventoryMangement.Repo.CustomerRepo1;
+import com.example.InventoryMangement.Repo.InvoiceRepo1;
+import com.example.InventoryMangement.Repo.ProductRepo1;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,9 @@ import java.util.UUID;
 @Transactional
 public class SalesService {
 @Autowired
-    private final InvoiceRepo invoiceRepo;
-    private final CustomerRepo customerRepo;
-    private final PdfGeneratorService pdfGeneratorService;
+    private final InvoiceRepo1 invoiceRepo;
+    private final CustomerRepo1 customerRepo;
+    private final PdfGeneratorService1 pdfGeneratorService;
 
 
 
@@ -36,7 +36,7 @@ public class SalesService {
     @Value("${admin.whatsapp.number:}")
     private String adminNumber;
 
-    public SalesService(InvoiceRepo invoiceRepo, CustomerRepo customerRepo, ProductRepo productRepo, PdfGeneratorService pdfGeneratorService) {
+    public SalesService(InvoiceRepo1 invoiceRepo, CustomerRepo1 customerRepo, ProductRepo1 productRepo, PdfGeneratorService1 pdfGeneratorService) {
         this.invoiceRepo = invoiceRepo;
         this.customerRepo = customerRepo;
         this.pdfGeneratorService = pdfGeneratorService;
@@ -44,7 +44,7 @@ public class SalesService {
     }
 
 
-    public Invoice createSale(Invoice invoice)
+    public Invoice1 createSale(Invoice1 invoice)
     {
         if (invoice.getCustomer() != null && invoice.getCustomer().getId() != null) {
             var existing = customerRepo.findById(Math.toIntExact(invoice.getCustomer().getId()))
@@ -60,7 +60,7 @@ public class SalesService {
 
         double grandTotal = 0;
 
-        for (InvoiceItem item : invoice.getItems()) {
+        for (InvoiceItem1 item : invoice.getItems()) {
             double lineTotal = (item.getQty() * item.getPrice()) * (1 - item.getDiscount() / 100);
             item.setTotal(lineTotal);
             item.setInvoice(invoice);
@@ -92,26 +92,26 @@ public class SalesService {
         }
 
 
-    private void updateStatus(Invoice inv) {
+    private void updateStatus(Invoice1 inv) {
         if (inv.getReceived() >= inv.getTotal()) inv.setStatus("PAID");
         else if (inv.getReceived() > 0) inv.setStatus("PARTIAL");
         else inv.setStatus("UNPAID");
     }
 
 
-    public List<Invoice> getAllSales() {
+    public List<Invoice1> getAllSales() {
         return invoiceRepo.findAll();
     }
 
-    public Invoice getInvoice(Long id) {
+    public Invoice1 getInvoice(Long id) {
         return invoiceRepo.findById(Math.toIntExact(id)).orElseThrow();
     }
 
-    public Customer saveCustomer(Customer c) {
+    public Customer1 saveCustomer(Customer1 c) {
         return customerRepo.save(c);
     }
 
-    public List<Customer> getAllCustomers() {
+    public List<Customer1> getAllCustomers() {
         return customerRepo.findAll();
     }
 }
