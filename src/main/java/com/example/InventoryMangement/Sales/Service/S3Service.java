@@ -1,4 +1,4 @@
-package com.example.InventoryMangement.Service;
+package com.example.InventoryMangement.Sales.Service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +8,6 @@ import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
@@ -16,7 +15,7 @@ import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignReques
 import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-@Service("fileS3Service")
+@Service
 public class S3Service {
 
     @Value("${aws.accessKeyId}")
