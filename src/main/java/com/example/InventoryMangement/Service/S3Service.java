@@ -16,7 +16,7 @@ import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignReques
 import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-@Service
+@Service("fileS3Service")
 public class S3Service {
 
     @Value("${aws.accessKeyId}")

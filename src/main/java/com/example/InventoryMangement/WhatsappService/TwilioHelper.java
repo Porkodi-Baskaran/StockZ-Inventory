@@ -7,7 +7,7 @@ import java.net.URI;
 import java.util.Collections;
 
 @Service
-public class TwilioService1 {
+public class TwilioHelper {
 
     @Value("${twilio.account.sid}")
     private String accountSid;

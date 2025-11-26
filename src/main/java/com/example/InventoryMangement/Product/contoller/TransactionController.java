@@ -32,7 +32,7 @@ public class TransactionController
          return new ResponseEntity<>(transactionservice.getAllTransaction(), HttpStatus.OK);
      }
     @GetMapping("{id}")
-    public ResponseEntity<Transaction> getTransactionsById(@PathVariable Long id ) {
+    public ResponseEntity<Transaction> getTransactionsById(@PathVariable Integer id ) {
         return new ResponseEntity<>(transactionservice.getTransactionById(id), HttpStatus.OK);
     }
 

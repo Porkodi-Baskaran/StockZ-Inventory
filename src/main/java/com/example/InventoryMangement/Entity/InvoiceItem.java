@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 
-public class InvoiceItem1 {
+public class InvoiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +19,7 @@ public class InvoiceItem1 {
 
     @ManyToOne
     @JoinColumn(name = "invoice_id")
-    private Invoice1 invoice;
+    private Invoice invoice;
 
 
     public Long getId() {
@@ -70,11 +70,11 @@ public class InvoiceItem1 {
         this.total = total;
     }
 
-    public Invoice1 getInvoice() {
+    public Invoice getInvoice() {
         return invoice;
     }
 
-    public void setInvoice(Invoice1 invoice) {
+    public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
 }

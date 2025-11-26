@@ -1,5 +1,7 @@
 package com.example.InventoryMangement.Sales.Service;
 
+import com.example.InventoryMangement.Entity.Customerentity;
+import com.example.InventoryMangement.Entity.Invoiceentity;
 import com.example.InventoryMangement.Product.Entity.Product;
 import com.example.InventoryMangement.Product.Myrepo.ProductRepo;
 import com.example.InventoryMangement.Product.Entity.Transaction;
@@ -27,13 +29,13 @@ import java.util.UUID;
 
 @Service
 @Transactional
-public class SalesService1 {
+public class SalesService {
 
     private final InvoiceRepo invoiceRepo;
     private final CustomerRepo customerRepo;
     private final ProductRepo productRepo;
     private final PdfGeneratorService pdfGeneratorService;
-    private final S3Service1 s3Service;
+    private final S3Service s3Service;
     private final TwilioService twilioService;
     private final TransactionRepo transactionRepository;
 
@@ -44,12 +46,12 @@ public class SalesService1 {
     private String adminNumber;
 
     @Autowired
-    public SalesService1(
+    public SalesService(
             InvoiceRepo invoiceRepo,
             CustomerRepo customerRepo,
             ProductRepo productRepo,
             PdfGeneratorService pdfGeneratorService,
-            S3Service1 s3Service,
+            S3Service s3Service,
             TwilioService twilioService,
             TransactionRepo transactionRepository
     ) {
@@ -126,8 +128,6 @@ public class SalesService1 {
             grandTotal += lineTotal.doubleValue();
         }
 
-        BigDecimal balance = invoice.getTotal().subtract(invoice.getReceived());
-        invoice.setBalance(balance);
 
 
 
@@ -159,10 +159,6 @@ public class SalesService1 {
             Transaction tx = new Transaction();
             tx.setProduct(product);
             tx.setQuantity(qty);
-            tx.setInvoiceNumber(invoice.getInvoiceNo());
-            tx.setAmountPaid(invoice.getReceived());
-            tx.setBalanceAmount(balance);
-            tx.setName(invoice.getCustomer().getName());
             // price per unit saved as integer in Transaction entity in your project -- cast carefully
             tx.setPricePerUnit((int) Math.round(item.getPrice()));
             tx.setTotalAmount((int) Math.round(item.getTotal()));
@@ -216,4 +212,10 @@ public class SalesService1 {
     public List<Customer> getAllCustomers() {
         return customerRepo.findAll();
     }
+   
+
+    
+    
+
+   
 }

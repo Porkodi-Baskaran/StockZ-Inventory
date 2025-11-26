@@ -1,9 +1,9 @@
 ﻿package com.example.InventoryMangement.Service;
 
-import com.example.InventoryMangement.Entity.Customer1;
-import com.example.InventoryMangement.Entity.Invoice1;
+import com.example.InventoryMangement.Entity.Customer;
+import com.example.InventoryMangement.Entity.Invoice;
 
-import com.example.InventoryMangement.Entity.InvoiceItem1;
+import com.example.InventoryMangement.Entity.InvoiceItem;
 import com.example.InventoryMangement.PDFGenrator.PdfGeneratorService1;
 import com.example.InventoryMangement.Repo.CustomerRepo1;
 import com.example.InventoryMangement.Repo.InvoiceRepo1;
@@ -44,7 +44,7 @@ public class SalesService {
     }
 
 
-    public Invoice1 createSale(Invoice1 invoice)
+    public Invoice createSale(Invoice invoice)
     {
         if (invoice.getCustomer() != null && invoice.getCustomer().getId() != null) {
             var existing = customerRepo.findById(Math.toIntExact(invoice.getCustomer().getId()))
@@ -60,7 +60,7 @@ public class SalesService {
 
         double grandTotal = 0;
 
-        for (InvoiceItem1 item : invoice.getItems()) {
+        for (InvoiceItem item : invoice.getItems()) {
             double lineTotal = (item.getQty() * item.getPrice()) * (1 - item.getDiscount() / 100);
             item.setTotal(lineTotal);
             item.setInvoice(invoice);
@@ -92,26 +92,26 @@ public class SalesService {
         }
 
 
-    private void updateStatus(Invoice1 inv) {
+    private void updateStatus(Invoice inv) {
         if (inv.getReceived() >= inv.getTotal()) inv.setStatus("PAID");
         else if (inv.getReceived() > 0) inv.setStatus("PARTIAL");
         else inv.setStatus("UNPAID");
     }
 
 
-    public List<Invoice1> getAllSales() {
+    public List<Invoice> getAllSales() {
         return invoiceRepo.findAll();
     }
 
-    public Invoice1 getInvoice(Long id) {
+    public Invoice getInvoice(Long id) {
         return invoiceRepo.findById(Math.toIntExact(id)).orElseThrow();
     }
 
-    public Customer1 saveCustomer(Customer1 c) {
+    public Customer saveCustomer(Customer c) {
         return customerRepo.save(c);
     }
 
-    public List<Customer1> getAllCustomers() {
+    public List<Customer> getAllCustomers() {
         return customerRepo.findAll();
     }
 }

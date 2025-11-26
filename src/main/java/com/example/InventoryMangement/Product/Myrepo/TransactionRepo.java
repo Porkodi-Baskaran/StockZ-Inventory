@@ -100,4 +100,6 @@ public interface TransactionRepo extends JpaRepository<Transaction, Integer> {
         ORDER BY totalPurchases DESC
         """, nativeQuery = true)
     List<Map<String, Object>> activeCustomerDetails();
+    
+    void deleteByInvoiceNumber(String invoiceNumber);
 }

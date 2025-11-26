@@ -60,7 +60,7 @@ public class TransactionService {
         return transRepo.findAll();
     }
 
-    public Transaction getTransactionById(Long id) {
+    public Transaction getTransactionById(Integer id) {
         return transRepo.findById(id).orElseThrow(() -> new RuntimeException("Transaction not found"));
     }
 }

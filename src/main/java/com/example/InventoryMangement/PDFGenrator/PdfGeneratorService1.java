@@ -1,6 +1,6 @@
 package com.example.InventoryMangement.PDFGenrator;
-import com.example.InventoryMangement.Entity.Invoice1;
-import com.example.InventoryMangement.Entity.InvoiceItem1;
+import com.example.InventoryMangement.Entity.Invoice;
+import com.example.InventoryMangement.Entity.InvoiceItem;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 @Service
 public class PdfGeneratorService1 {
 
-    public String generateInvoicePdf(Invoice1 invoice) {
+    public String generateInvoicePdf(Invoice invoice) {
         try {
 
             File folder = new File("invoices");
@@ -57,7 +57,7 @@ public class PdfGeneratorService1 {
 
             // ✅ Table Rows
             double grandTotal = 0.0;
-            for (InvoiceItem1 item : invoice.getItems()) {
+            for (InvoiceItem item : invoice.getItems()) {
                 double lineTotal = item.getQty() * item.getPrice() - item.getDiscount();
                 grandTotal += lineTotal;
 

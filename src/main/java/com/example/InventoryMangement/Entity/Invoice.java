@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 
-public class Invoice1 {
+public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,13 +18,13 @@ public class Invoice1 {
     private Date date;
 
     @ManyToOne
-    private Customer1 customer;
+    private Customer customer;
     private double total;
     private double received;
     private String status;
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InvoiceItem1> items = new ArrayList<>();
+    private List<InvoiceItem> items = new ArrayList<>();
 
 
     public Integer getId() {
@@ -51,11 +51,11 @@ public class Invoice1 {
         this.date = date;
     }
 
-    public Customer1 getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer1 customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -83,11 +83,11 @@ public class Invoice1 {
         this.status = status;
     }
 
-    public List<InvoiceItem1> getItems() {
+    public List<InvoiceItem> getItems() {
         return items;
     }
 
-    public void setItems(List<InvoiceItem1> items) {
+    public void setItems(List<InvoiceItem> items) {
         this.items = items;
     }
 }
